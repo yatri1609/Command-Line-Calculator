@@ -1,4 +1,4 @@
-# Calculator
+# Command Line Calculator
 
 ## What
 
