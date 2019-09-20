@@ -1280,13 +1280,13 @@ bool execCommand(char *str)
 	return recognized;
 }
 
+//Add a save to a file function and assign a curindex 
 int main(int argc, char *argv[])
 {
 	char* str = NULL;
 	token* tokens = NULL;
 	int numTokens = 0;
 	Stack expr;
-	Stack exp;
 	int i;
 	int ch, rflag = 0;
 	prefs.precision = DEFAULTPRECISION;
@@ -1303,13 +1303,24 @@ int main(int argc, char *argv[])
 	}
 	str = ufgets(stdin);
 	//save to a file
+	FILE *f = fopen("expressions.txt", "wb");
+	fwrite(str, sizeof(char), sizeof(str), f);
+	fclose(f);
+	
 	while (str !=NULL && strcmp(str, "up") == 0)
 	{
-		//show the expression above the cursor reading from file, cursor at last expression
+		FILE *f = fopen("expressions.txt", "r+");
+		fseek(f, -1, SEEK_CUR);
+		char c = fscanf(f, "%d");
+		fprintf(f,&c);
 	}
 	while (str !=NULL && strcmp(str, "dw") == 0)
 	{
 		//show the expression below the cursor
+		FILE *f = fopen("expressions.txt", "r+");
+		fseek(f, 1, SEEK_CUR);
+		char c = fscanf(f, "%d");
+		fprintf(f,&c);
 	}
 
 	while(str != NULL && strcmp(str, "quit") != 0)
@@ -1318,8 +1329,7 @@ int main(int argc, char *argv[])
 			goto get_new_string;
 		if(type(*str) == text)
 		{
-			// Do something with command 
-			// save text saves the previous argv[] array into a file after converting it into string
+			
 			if (!execCommand(str))
 				goto no_command;
 
@@ -1345,12 +1355,12 @@ no_command:
 				}
 			}
 
-			stackInit(&exp, 10);
+			/*stackInit(&exp, 10);
 			stackPush(&exp, str);
 			if(stackSize(&exp)>10)
 			{
 				stackPop(&exp);
-			}
+			}*/
 
 			// Convert to postfix
 			stackInit(&expr, numTokens);
