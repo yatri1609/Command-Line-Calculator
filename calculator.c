@@ -1286,6 +1286,7 @@ int main(int argc, char *argv[])
 	token* tokens = NULL;
 	int numTokens = 0;
 	Stack expr;
+	Stack exp;
 	int i;
 	int ch, rflag = 0;
 	prefs.precision = DEFAULTPRECISION;
@@ -1301,6 +1302,16 @@ int main(int argc, char *argv[])
 		}
 	}
 	str = ufgets(stdin);
+	//save to a file
+	while (str !=NULL && strcmp(str, "up") == 0)
+	{
+		//show the expression above the cursor reading from file, cursor at last expression
+	}
+	while (str !=NULL && strcmp(str, "dw") == 0)
+	{
+		//show the expression below the cursor
+	}
+
 	while(str != NULL && strcmp(str, "quit") != 0)
 	{
 		if (strlen(str) == 0)
@@ -1332,6 +1343,13 @@ no_command:
 						printf(" = %f", buildNumber(tokens[i]));
 					printf("\n");
 				}
+			}
+
+			stackInit(&exp, 10);
+			stackPush(&exp, str);
+			if(stackSize(&exp)>10)
+			{
+				stackPop(&exp);
 			}
 
 			// Convert to postfix
