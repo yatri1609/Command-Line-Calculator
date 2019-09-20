@@ -1314,6 +1314,7 @@ int main(int argc, char *argv[])
 		char c = fscanf(f, "%d");
 		fprintf(f,&c);
 	}
+	
 	while (str !=NULL && strcmp(str, "dw") == 0)
 	{
 		//show the expression below the cursor

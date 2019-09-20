@@ -42,7 +42,7 @@ Computation begins with the tokenization of the input string, maintaining origin
 
 ## Building and Running
 
-Build with `make`. Clean with `make clean`. Run with `./calc`. Type any mathematical expression, for example, `3*(2^4) - 3*floor(2 * sin(3.14 / 2))` and press the Enter key. Type `quit` to close.
+Build with `make`. Clean with `make clean`. Run with `./calc`. Type any mathematical expression, for example, `3*(2^4) - 3*floor(2 * sin(3.14 / 2))` and press the Enter key. Type `quit` to close. Type `up` to see the previous expression and `down` to see the next expression after the expression seen on the terminal.
 
 There is a `-r` command line option which removes the `=` from the output, outputting only the result value. This is designed for use in situations such as shell scripting, where only the raw, unprocessed value is desired.
 
